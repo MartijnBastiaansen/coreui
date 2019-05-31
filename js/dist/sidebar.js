@@ -56,7 +56,8 @@ var Sidebar = function ($) {
     NAVIGATION: '.sidebar-nav > .nav',
     SIDEBAR: '.sidebar',
     SIDEBAR_MINIMIZER: '.sidebar-minimizer',
-    SIDEBAR_TOGGLER: '.sidebar-toggler'
+    SIDEBAR_TOGGLER: '.sidebar-toggler',
+    SIDEBAR_SCROLL: '.sidebar-scroll'
   };
   var ShowClassNames = ['sidebar-show', 'sidebar-sm-show', 'sidebar-md-show', 'sidebar-lg-show', 'sidebar-xl-show'];
   /**
@@ -120,9 +121,15 @@ var Sidebar = function ($) {
       }
     };
 
-    _proto.makeScrollbar = function makeScrollbar(container) {
-      if (container === void 0) {
+    _proto.makeScrollbar = function makeScrollbar() {
+      var container = Selector.SIDEBAR_SCROLL;
+
+      if (document.querySelector(container) === null) {
         container = Selector.NAVIGATION_CONTAINER;
+
+        if (document.querySelector(container) === null) {
+          return null;
+        }
       }
 
       var ps = new PerfectScrollbar(document.querySelector(container), {
